@@ -1,0 +1,33 @@
+server:
+  port: 9000
+
+
+spring:
+  application:
+    name: API-GATEWAY
+  cloud:
+    gateway:
+      routes:
+        - id: DUMMY-SERVICE
+          uri: lb://DUMMY-SERVICE
+          predicates:
+            - Path=/dummy/**
+        - id: PRICE-SERVICE
+          uri: lb://PRICE-SERVICE
+          predicates:
+            - Path=/price/**
+        - id: FLIGHT-SERVICE
+          uri: lb://FLIGHT-SERVICE
+          predicates:
+            - Path=/flight/**
+
+
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    instance:
+      hostname: localhost

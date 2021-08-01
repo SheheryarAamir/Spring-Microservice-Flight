@@ -1,0 +1,13 @@
+server:
+  port: 9100
+
+spring:
+  application:
+    name: CONFIG-SERVER
+  cloud:
+    config:
+      server:
+        git:
+          default-label: main
+          uri: https://github.com/SheheryarAamir/config-server
+          clone-on-start: true
