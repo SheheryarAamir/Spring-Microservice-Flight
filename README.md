@@ -19,3 +19,6 @@ SLA is 850ms, load might vary: from 1K to 50K request per <br/>
 Price<br/>
 taking 3GB RAM - you have to keep in memory<br/>
 SLA is 50ms, load is around 50 request per day<br/>
+
+
+![alt text](https://github.com/SheheryarAamir/Spring-Microservice-Flight/blob/main/STSE.png?raw=true)
