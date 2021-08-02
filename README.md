@@ -1,8 +1,9 @@
 # Spring-Microservice-Flight
+# Reactive # Spring WebFlux
 
 # Functional Requirements
 -Flight Service<br/>
-	getFlight (date or airport of departure or arrival) returns flight number<br/>
+	getFlight (date or airport of departure or arrival) returns flight number<br/><br/>
 -Price Service<br/>
 	getPrice  (flight number, date) returns price<br/>
 
