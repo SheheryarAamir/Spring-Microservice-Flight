@@ -1,20 +1,24 @@
 # Spring-Microservice-Flight
+# Reactive # Spring WebFlux
 
 # Functional Requirements
--Flight Service
-	getFlight (date or airport of departure or arrival) returns flight number
--Price Service
-	getPrice  (flight number, date) returns price
+-Flight Service<br/>
+	getFlight (date or airport of departure or arrival) returns flight number<br/><br/>
+-Price Service<br/>
+	getPrice  (flight number, date) returns price<br/>
 
 # Non-Functional Requirements
-Scalable 
-Highly Performant
-Highly Available
+Scalable <br/>
+Highly Performant<br/>
+Highly Available<br/>
 
 # Estimates
-Flight
-SLA is 850ms, load might vary: from 1K to 50K request per second
+Flight<br/>
+SLA is 850ms, load might vary: from 1K to 50K request per <br/>
+<br/>
+Price<br/>
+taking 3GB RAM - you have to keep in memory<br/>
+SLA is 50ms, load is around 50 request per day<br/>
 
-Price
-taking 3GB RAM - you have to keep in memory
-SLA is 50ms, load is around 50 request per day
+
+![alt text](https://github.com/SheheryarAamir/Spring-Microservice-Flight/blob/main/STSE.png?raw=true)
