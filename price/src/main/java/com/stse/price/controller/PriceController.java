@@ -27,9 +27,9 @@ public class PriceController {
     private PriceService priceService;
 
     @PostMapping("/save")
-    public Mono<PricingVO> savePricingInformation(@ModelAttribute Mono<PricingVO> pricingVO){
+    public Mono<PricingVO> savePricingInformation(@ModelAttribute PricingVO pricingVO){
         log.info("Saving pricing information - Controller");
-        return priceService.savePricingInformation(pricingVO);
+        return priceService.savePricingInformation(Mono.just(pricingVO));
     }
 
     @GetMapping(value = "/{flightNumber}/{flightDate}", produces = MediaType.APPLICATION_STREAM_JSON_VALUE)

@@ -26,9 +26,9 @@ public class FlightController {
     private FlightService flightService;
 
     @PostMapping("/save")
-    public Mono<FlightVO> saveFlightInformation(@RequestBody Mono<FlightVO> flightVO){
+    public Mono<FlightVO> saveFlightInformation(@RequestBody FlightVO flightVO){
         log.info("Saving flight information - Controller");
-        return flightService.saveFlightInformation(flightVO);
+        return flightService.saveFlightInformation(Mono.just(flightVO));
     }
 
     @GetMapping(value = "/{flightDate}/{airport}", produces = MediaType.APPLICATION_STREAM_JSON_VALUE)

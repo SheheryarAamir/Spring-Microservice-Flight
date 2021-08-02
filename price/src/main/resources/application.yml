@@ -10,4 +10,4 @@ spring:
     mongodb:
       user: admin
       password: admin
-      uri: mongodb+srv://cluster0.f2b3n.mongodb.net/myFirstDatabase
+      uri: mongodb+srv://cluster0.f2b3n.mongodb.net/STSE
