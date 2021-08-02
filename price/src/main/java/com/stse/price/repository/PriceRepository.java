@@ -1,13 +1,15 @@
 package com.stse.price.repository;
 
 import com.stse.price.entity.PriceEntity;
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.stse.price.vo.PricingVO;
+import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 import org.springframework.stereotype.Repository;
+import reactor.core.publisher.Flux;
 
 import java.util.List;
 
 @Repository
-public interface PriceRepository extends JpaRepository<PriceEntity, Long> {
+public interface PriceRepository extends ReactiveMongoRepository<PriceEntity, Long> {
 
-    List<PriceEntity> findByFlightNumberAndFlightDate(String flightNumber, String flightDate);
+    Flux<PriceEntity> findByFlightNumberAndFlightDate(String flightNumber, String flightDate);
 }

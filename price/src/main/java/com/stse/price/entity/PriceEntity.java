@@ -3,16 +3,16 @@ package com.stse.price.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.*;
 
-@Entity
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Document(collection = "price")
 public class PriceEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+
     private long priceId;
 
     private String flightNumber;

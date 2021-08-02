@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 
 import java.awt.*;
@@ -26,20 +27,16 @@ public class PriceController {
     private PriceService priceService;
 
     @PostMapping("/save")
-    public PriceEntity savePricingInformation(@RequestBody PriceEntity priceEntity){
+    public Mono<PricingVO> savePricingInformation(@ModelAttribute Mono<PricingVO> pricingVO){
         log.info("Saving pricing information - Controller");
-        return priceService.savePricingInformation(priceEntity);
+        return priceService.savePricingInformation(pricingVO);
     }
 
     @GetMapping(value = "/{flightNumber}/{flightDate}", produces = MediaType.APPLICATION_STREAM_JSON_VALUE)
-    public Flux<Double> findByFlightNumberAndFlightDateReturnStream(@PathVariable("flightNumber") String flightNumber,
+    public Flux<PricingVO> findByFlightNumberAndFlightDateReturnStream(@PathVariable("flightNumber") String flightNumber,
                                                                     @PathVariable("flightDate") String flightDate){
         log.info("findFlightByFlightNumber - Controller");
-        return Flux.fromIterable(priceService.findByFlightDateAndAirport(flightNumber, flightDate).stream()
-                .map(x -> x.getPrice())
-                .collect(Collectors.toList())
-                )
-                .delayElements(Duration.ofSeconds(1))
+        return priceService.findByFlightDateAndAirport(flightNumber, flightDate)
                 .log();
 
     }

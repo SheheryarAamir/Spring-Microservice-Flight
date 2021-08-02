@@ -6,3 +6,8 @@ spring:
     name: PRICE-SERVICE
   zipkin:
     base-url: http://localhost:9411
+  data:
+    mongodb:
+      user: admin
+      password: admin
+      uri: mongodb+srv://cluster0.f2b3n.mongodb.net/myFirstDatabase

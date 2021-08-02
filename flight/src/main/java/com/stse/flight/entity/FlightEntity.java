@@ -4,21 +4,23 @@ import com.stse.flight.enums.FlightEnum;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.*;
+import java.lang.annotation.Documented;
 
-@Entity
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Document(collection = "flights")
 public class FlightEntity {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long flightId;
+    private String id;
     private String flightNumber;
     private String flightDate;
     private String airport;
-    @Enumerated(EnumType.ORDINAL)
     private FlightEnum departOrArrival;
 
 }

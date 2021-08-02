@@ -9,6 +9,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PricingVO {
 
+    private long priceId;
+
     private String flightNumber;
     private String flightDate;
+    private double price;
 }

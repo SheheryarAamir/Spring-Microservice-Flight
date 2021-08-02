@@ -32,7 +32,7 @@ public class DummyController {
     }
 
     @PostMapping("/airports")
-    public String addAirport_Server(@RequestBody String airport) {
+    public String addAirport(@RequestBody String airport) {
         simulateDelayedProcessing();
         return "LHR";
     }
@@ -42,7 +42,7 @@ public class DummyController {
     void simulateDelayedProcessing() {
         Random rand = new Random();
         try {
-            Thread.sleep(rand.nextInt(800 - 500) + 500); //500ms - 800ms seconds
+            Thread.sleep(rand.nextInt(800 - 500) + 500); //5 seconds
         } catch (InterruptedException e) {
             e.printStackTrace();
 

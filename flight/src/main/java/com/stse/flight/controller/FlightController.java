@@ -10,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.time.Duration;
 import java.util.ArrayList;
@@ -25,13 +26,13 @@ public class FlightController {
     private FlightService flightService;
 
     @PostMapping("/save")
-    public FlightEntity saveFlightInformation(@RequestBody FlightEntity flightEntity){
+    public Mono<FlightVO> saveFlightInformation(@RequestBody Mono<FlightVO> flightVO){
         log.info("Saving flight information - Controller");
-        return flightService.saveFlightInformation(flightEntity);
+        return flightService.saveFlightInformation(flightVO);
     }
 
     @GetMapping(value = "/{flightDate}/{airport}", produces = MediaType.APPLICATION_STREAM_JSON_VALUE)
-    public Flux<String> findByFlightDateOrAirport(@PathVariable("flightDate") String flightDate,
+    public Flux<FlightVO> findByFlightDateOrAirport(@PathVariable("flightDate") String flightDate,
                                                   @PathVariable("airport") String airport){
         log.info("findByFlightDateOrAirport - Controller");
 
@@ -80,24 +81,15 @@ public class FlightController {
 
 
         if(flightDate.isEmpty() && airport.isEmpty()){
-            return Flux.just("No Data");
+            return Flux.just(new FlightVO());
         }else if(flightDate.isEmpty()){
-            return Flux.fromIterable(flightService.findByAirport(airport).stream()
-                    .map(x -> x.getFlightNumber())
-                    .collect(Collectors.toList()))
-                    .delayElements(Duration.ofSeconds(1))
+            return flightService.findByAirport(airport)
                     .log();
         }else if(airport.isEmpty()){
-            return Flux.fromIterable(flightService.findByFlightDate(flightDate).stream()
-                    .map(x -> x.getFlightNumber())
-                    .collect(Collectors.toList()))
-                    .delayElements(Duration.ofSeconds(1))
+            return flightService.findByFlightDate(flightDate)
                     .log();
         }
-        return Flux.fromIterable(flightService.findByFlightDateAndAirport(flightDate, airport).stream()
-                .map(x -> x.getFlightNumber())
-                .collect(Collectors.toList()))
-                .delayElements(Duration.ofSeconds(1))
+        return flightService.findByFlightDateAndAirport(flightDate, airport)
                 .log();
     }
 }
